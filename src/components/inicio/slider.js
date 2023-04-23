@@ -6,8 +6,9 @@ const Slider = () =>{
     const [lista, setLista] = useState([]);
     
     const GetList = () =>  {
-        axios.get(global.direccionAcceso+"sliders?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/sliders?populate=*").then((value)=>{
         setLista(value.data.data);
+        console.log(value.data.data)
         });
     };
     
@@ -28,7 +29,7 @@ const Slider = () =>{
                         }
                         return (
                         <div className={secuencia} key={item.id}>
-                            <img src={"http://"+global.direccionAcceso+":1337"+item.attributes.sliderImg.data[0].attributes.url} className=""></img>
+                            <img src={global.direccionAcceso+item.attributes.sliderImg.data[0].attributes.url} className=""></img>
                         </div>
                         )
                     })}
