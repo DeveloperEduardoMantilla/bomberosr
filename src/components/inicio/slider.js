@@ -6,7 +6,7 @@ const Slider = () =>{
     const [lista, setLista] = useState([]);
     
     const GetList = () =>  {
-        axios.get("http://"+global.direccionAcceso+":1337/api/sliders?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"sliders?populate=*").then((value)=>{
         setLista(value.data.data);
         });
     };
