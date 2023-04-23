@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SliderMeesage from './sliderMessage';
 import axios from "axios";
 import Swal from 'sweetalert2'
+import * as global from "../components/global.js";
 
 const ServiciosForm = ()=>{
 
@@ -20,7 +21,7 @@ const ServiciosForm = ()=>{
     });
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/servicios?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/servicios?populate=*").then((value)=>{
         setServicio(value.data.data);
         });
     };
@@ -45,7 +46,7 @@ const ServiciosForm = ()=>{
         const data = new FormData();
         data.append('files', formData.documentoUrl);
 
-        axios.post('http://localhost:1337/api/solicitu-servicios',{data: formData})
+        axios.post(global.direccionAcceso+'/api/solicitu-servicios',{data: formData})
         .then(response => {
             Swal.fire({
                 title: `Solicitud enviada con exito!`,

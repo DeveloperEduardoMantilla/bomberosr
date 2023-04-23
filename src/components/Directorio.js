@@ -7,7 +7,7 @@ const Directorio = () =>{
     const [lista, setLista] = useState([]);
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/equipo-bomberos?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/equipo-bomberos?populate=*").then((value)=>{
         setLista(value.data.data);
         });
     };
@@ -24,7 +24,6 @@ const Directorio = () =>{
                 <div className="carousel-inner carousel_inner_directorio ">
                     {
                         lista.map((item,key)=>{
-                            
                             var secuencia="carousel-item";
                             var fotografia="../assets/img/contacto/testimonial-1.jpg";
                             if(key==1){
@@ -32,9 +31,8 @@ const Directorio = () =>{
                             }else{
                                 secuencia="carousel-item";
                             }
-                            console.log();
                             if(item.attributes.foto.data!=null){
-                                fotografia="http://"+global.direccionAcceso+":1337"+item.attributes.foto.data[0].attributes.url;
+                                fotografia=global.direccionAcceso+item.attributes.foto.data[0].attributes.url;
                             }
 
                             return(

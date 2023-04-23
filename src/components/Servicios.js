@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink,Link } from "react-router-dom";
 import axios from "axios";
 import foto from "../assets/img/inicio/loading.gif";
+import * as global from "../components/global.js";
 
 const Servicios = () =>{
     const [lista, setLista] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/servicios?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/servicios?populate=*").then((value)=>{
         setLista(value.data.data);
         setIsLoading(false);
         });
@@ -47,7 +48,7 @@ const Servicios = () =>{
                                         <NavLink className="btn btn-solicitar btn-sm" to="serviciosForm"> Solicitar</NavLink>
                                     </div>
                                     <div className="servicios-bomberos-img">
-                                        <img src={"http://localhost:1337"+item.attributes.img.data[0].attributes.url} alt="Servicios Bomberos"></img>
+                                        <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt="Servicios Bomberos"></img>
                                     </div>
                                 </div>
                                 )

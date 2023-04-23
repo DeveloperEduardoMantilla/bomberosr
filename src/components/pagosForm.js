@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SliderMeesage from './sliderMessage';
 import axios from "axios";
+import * as global from "../components/global.js";
 
 const ServiciosForm = ()=>{
 
@@ -17,7 +18,7 @@ const ServiciosForm = ()=>{
     });
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/servicios?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/servicios?populate=*").then((value)=>{
         setServicio(value.data.data);
         });
     };
@@ -42,7 +43,7 @@ const ServiciosForm = ()=>{
         const data = new FormData();
         data.append('files', formData.documentoUrl);
 
-        axios.post('http://localhost:1337/api/solicitu-servicios',{data: formData})
+        axios.post(global.direccionAcceso+'/api/solicitu-servicios',{data: formData})
         .then(response => {
             alert("Los datos han sido enviados correctamente");
             setFormData({
@@ -76,15 +77,15 @@ const ServiciosForm = ()=>{
                                 <p className="m-0 p-0">Tipo de Persona</p>
                             </div>
                             <div className="d-flex">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"/>
-                                    <label class="form-check-label">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"/>
+                                    <label className="form-check-label">
                                         Natural
                                     </label>
                                 </div>
-                                <div class="form-check ps-5">
-                                    <input class="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"  />
-                                    <label class="form-check-label">
+                                <div className="form-check ps-5">
+                                    <input className="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"  />
+                                    <label className="form-check-label">
                                         Juridica
                                     </label>
                                 </div>
@@ -148,18 +149,18 @@ const ServiciosForm = ()=>{
                                 </div>
                                 <div className="form-group col-12 col-md-12 mt-3">
                                     <label>Observacion <span>*</span></label>
-                                    <textArea type="text" className="form-control form-control-sm" name="observacion" value={formData.observacion} onChange={handleInputChange}/>
+                                    <textarea type="text" className="form-control form-control-sm" name="observacion" value={formData.observacion} onChange={handleInputChange}/>
                                 </div>
                                 <div className="form-group col-12 mt-3">
                                     <label>Seleccion Archivo</label>
                                     <input type='file' className="form-control form-control-sm"/>
                                 </div>
-                                <div class="mb-3 form-group col-12 pt-4">
-                                    <input type="checkbox" class="form-check-input me-2" id="exampleCheck1" />
-                                    <label class="form-check-label" for="exampleCheck1">Politica de tratamiento de datos personales</label>
+                                <div className="mb-3 form-group col-12 pt-4">
+                                    <input type="checkbox" className="form-check-input me-2" id="exampleCheck1" />
+                                    <label className="form-check-label">Politica de tratamiento de datos personales</label>
                                 </div>
                                 <div className="col-3">
-                                    <button type="submit" class="btn btn-dark">Enviar</button>
+                                    <button type="submit" className="btn btn-dark">Enviar</button>
                                 </div>
                                 
                             </div>

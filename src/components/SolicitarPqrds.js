@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import img from '../assets/img/logo.png';
+import * as global from "../components/global.js";
 
 function SolicitarPqrds(){
     const Swal = require('sweetalert2')
@@ -12,14 +13,14 @@ function SolicitarPqrds(){
         documento: '',
         email: '',
         telefono: '',
-        tipo_solicitud: '',
+        tipo_pqrd: '',
         asunto: '',
         observacion: '',
         documentoUrl: null
     });
     
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/tipo-solicituds?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/tipo-pqrds?populate=*").then((value)=>{
         setServicio(value.data.data);
         });
     };
@@ -52,7 +53,7 @@ function SolicitarPqrds(){
 
         const upload_res = await axios({
             method: 'POST',
-            url: ' http://localhost:1337/api/upload/',
+            url: global.direccionAcceso+'/api/upload/',
             data
         })
 
@@ -60,10 +61,10 @@ function SolicitarPqrds(){
 
             setFormData((prevState) => ({
                 ...prevState,
-                documentoUrl: "http://localhost:1337"+upload_res.data[0].url,
+                documentoUrl: global.direccionAcceso+upload_res.data[0].url,
             }));
 
-            axios.post('http://localhost:1337/api/pqrds',{data: formData})
+            axios.post(global.direccionAcceso+'/api/pqrds',{data: formData})
             .then(response => {
                 Swal.fire({
                     title: `Pqrds enviada con exito!`,
@@ -80,7 +81,7 @@ function SolicitarPqrds(){
                     documento: '',
                     email: '',
                     telefono: '',
-                    tipo_solicitud: 0,
+                    tipo_pqrd: 0,
                     asunto: '',
                     observacion: '',
                     documentoUrl: ''
@@ -129,8 +130,7 @@ function SolicitarPqrds(){
                         <div className="col-12">
                             <div className="form-group col-12 col-md-6">
                                 <label>Tipo Solicitud<span>*</span></label>
-                                <select className="form-select form-select-sm" name="tipo_solicitud"  required value={formData.tipo_solicitud} onChange={handleInputChange} required>
-                                    <option select>Seleccione...</option>
+                                <select className="form-select form-select-sm" name="tipo_pqrd"  required value={formData.tipo_pqrd} onChange={handleInputChange}>
                                     {servicio.map((item)=>{
                                         return(
                                             <option value={(item.id)} key={item.id}>{item.attributes.nombre}</option>

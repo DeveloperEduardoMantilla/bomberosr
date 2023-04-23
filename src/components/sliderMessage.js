@@ -1,9 +1,9 @@
 const SliderMeesage = ()  =>{
     return(
         <div className="sliderMeessage">
-            <diV className="sliderMeessageCapa">
+            <div className="sliderMeessageCapa">
                 <h2>Atención y servicios a la ciudadania</h2>
-            </diV>
+            </div>
         </div>        
     )
 }

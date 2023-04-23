@@ -8,7 +8,6 @@ const Slider = () =>{
     const GetList = () =>  {
         axios.get(global.direccionAcceso+"/api/sliders?populate=*").then((value)=>{
         setLista(value.data.data);
-        console.log(value.data.data)
         });
     };
     

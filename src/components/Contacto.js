@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {FaMap, FaCodepen} from "react-icons/fa";
 import foto from "../assets/img/inicio/loading.gif"
+import * as global from "../components/global.js";
 
 const Contacto = () =>{
     const [lista, setLista] = useState([]);
@@ -10,11 +11,11 @@ const Contacto = () =>{
 
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/informacion-bomberos?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/informacion-bomberos?populate=*").then((value)=>{
             setLista(value.data.data);
             setIsLoading(false);
         });
-        axios.get("http://localhost:1337/api/dependencias?populate=*").then((valueDependencia)=>{
+        axios.get(global.direccionAcceso+"/api/dependencias?populate=*").then((valueDependencia)=>{
             setDependencia(valueDependencia.data.data);
             setIsLoading(false);
         });
@@ -64,7 +65,7 @@ const Contacto = () =>{
                         return (
                             <div className="box-dependencias" key={item.id}>
                                 <div className="box-dependencias-md1">
-                                    <img alt=""  src={"http://localhost:1337"+item.attributes.img.data[0].attributes.url}></img>
+                                    <img alt=""  src={global.direccionAcceso+item.attributes.img.data[0].attributes.url}></img>
                                 </div>
                                 <div className="box-dependencias-md2">
                                     <h1>{item.attributes.nombre}</h1>

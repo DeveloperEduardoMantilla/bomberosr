@@ -3,6 +3,7 @@ import axios from "axios";
 import {FaEye} from 'react-icons/fa';
 import { NavLink,Link } from "react-router-dom";
 import foto from "../../assets/img/inicio/loading.gif";
+import * as global from "../global.js";
 
 const Noticias = () =>{
     const [lista, setLista] = useState([]);
@@ -10,7 +11,7 @@ const Noticias = () =>{
     
     const GetList = () =>  {
         setIsLoading(false);
-        axios.get("http://localhost:1337/api/noticias?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/noticias?populate=*").then((value)=>{
         setLista(value.data.data);
         });
     };
@@ -54,7 +55,7 @@ const Noticias = () =>{
                                             <a href={"VerNoticia/"+item.id} className="noticia-inicio" key={item.id}>
                                                 <div className="noticia-inicio-contenido">
                                                     <div className="noticia-inicio-img">
-                                                    <img  src={"http://localhost:1337"+item.attributes.img.data[0].attributes.url} alt="contenido fallo" width="100%"></img>
+                                                    <img  src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt="contenido fallo" width="100%"></img>
                                                     </div>
                                                     <div className="noticia-contenido">
                                                         <h2>{item.attributes.titulo}</h2>

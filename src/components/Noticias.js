@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink,Link } from "react-router-dom";
 import foto from "../assets/img/inicio/loading.gif"
 import { padding } from "@mui/system";
+import * as global from "../components/global.js";
 
 const Noticias = ()  =>{
     const [isLoading, setIsLoading] = useState(true); 
@@ -10,7 +11,7 @@ const Noticias = ()  =>{
     const [lista, setLista] = useState([]);
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/noticias?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/noticias?populate=*").then((value)=>{
         setLista(value.data.data);
         setIsLoading(false);
         }).catch(error =>{
@@ -43,7 +44,7 @@ const Noticias = ()  =>{
                         return (
                             <a href={"verNoticia/"+item.id} className="pag-noticias-box" key={item.id}>
                                 <div className="pag-img">
-                                    <img src={"http://localhost:1337"+item.attributes.img.data[0].attributes.url} alt=""></img>
+                                    <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt=""></img>
                                 </div>
                                 <div className="pag-noticia">
                                     <h1>{item.attributes.titulo}</h1>

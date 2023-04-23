@@ -1121,7 +1121,7 @@ footer{
     align-items: center;
 
 }
-.carousel-item{
+.carousel_inner_directorio >.carousel-item{
     height: auto;
 }
 .info-contact{

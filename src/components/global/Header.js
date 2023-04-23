@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom';
 import imgLogo from '../../assets/img/logo.png';
 import axios from "axios";
 import { FaFacebook,FaInstagram,FaYoutube,FaPhoneVolume,FaEnvelope} from "react-icons/fa";
+import * as global from "../global.js";
 
 const Header = () =>{
     const [data, setData] = useState([]);
 
     const GetList = () =>  {
-        axios.get("http://localhost:1337/api/informacion-bomberos/1?populate=*/").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/informacion-bomberos/1?populate=*/").then((value)=>{
             setData(value.data.data);
         });
     };

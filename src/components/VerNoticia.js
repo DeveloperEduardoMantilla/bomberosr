@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import foto from "../assets/img/inicio/loading.gif";
+import * as global from "../components/global.js";
 
 const VerNoticia = () =>{
     const [isLoading, setIsLoading] = useState(true); 
     const [noticia, setNoticia] = useState({});
  
     let params = useParams();
-    var ruta = "http://localhost:1337/api/noticias/"+params.id+"?populate=*";
+    var ruta = global.direccionAcceso+"/api/noticias/"+params.id+"?populate=*";
  
     useEffect(()=>{
         axios.get(ruta).then(value=>{
@@ -32,7 +33,7 @@ const VerNoticia = () =>{
                 <div className="contenido-noticia">
                     <h1>{noticia.attributes.titulo}</h1>
                     <h2> Noticia | {noticia.attributes.fecha} | Bomberos de Lebrija</h2>
-                    <img src={"http://localhost:1337"+noticia.attributes.img.data[0].attributes.url} style={{maxWidth:'400px'}} />
+                    <img src={global.direccionAcceso+noticia.attributes.img.data[0].attributes.url} style={{maxWidth:'400px'}} />
                     <p>{noticia.attributes.descripcion}</p>    
                 </div>
             </div>
