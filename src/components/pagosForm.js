@@ -23,8 +23,15 @@ const ServiciosForm = ()=>{
         });
     };
 
+    const tipoPersona = () => {
+        let radioButton = document.querySelectorAll('input[type=radio][name="tipoPersona"]');
+        
+       
+    }
+
     useEffect(()=>{
         GetList();
+        tipoPersona();
     });
 
 
@@ -78,13 +85,13 @@ const ServiciosForm = ()=>{
                             </div>
                             <div className="d-flex">
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"/>
+                                    <input className="form-check-input" type="radio" name="tipoPersona" id="tipoRepresentante"/>
                                     <label className="form-check-label">
                                         Natural
                                     </label>
                                 </div>
                                 <div className="form-check ps-5">
-                                    <input className="form-check-input" type="radio" name="tipoPersona" id="flexRadioDefault1"  />
+                                    <input className="form-check-input" type="radio" name="tipoPersona" id="tipoRepresentante"  />
                                     <label className="form-check-label">
                                         Juridica
                                     </label>

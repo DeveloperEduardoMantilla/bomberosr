@@ -7,7 +7,7 @@ const Conozcanos =() => {
     const [data, setLista] = useState([]);
     const [isLoading, setIsLoading] = useState(true); 
     const GetList = () =>  {
-        axios.get("http://"+global.direccionAcceso+":1337/api/modulo-inicios?populate=*").then((value)=>{
+        axios.get(global.direccionAcceso+"/api/modulo-inicios?populate=*").then((value)=>{
         setLista(value.data.data);
         });
     };
@@ -35,7 +35,7 @@ const Conozcanos =() => {
                                 <p className="box-info-text">{item.attributes.descripcion}</p>
                             </div>
                             <div className="box-info-descatada-md">
-                                <img src={"http://"+global.direccionAcceso+":1337"+item.attributes.img.data[0].attributes.url} alt=""></img>
+                                <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt=""></img>
                             </div>
                         </div>)
                     })}
