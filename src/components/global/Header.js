@@ -78,11 +78,13 @@ const Header = () =>{
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav m-auto mb-2 mb-lg-0">
+                    
                         <NavLink className="nav-link " activeClassName="active-menu" to="/home">Inicio</NavLink>
                         <NavLink className="nav-link" activeClassName="active-menu" to="/servicios">Servicios</NavLink>
                         <NavLink className="nav-link" activeClassName="active-menu" to="/noticias">Noticias</NavLink>
                         <NavLink className="nav-link" activeClassName="active-menu" to="/emergencias">Emergencias</NavLink>
                         <NavLink className="nav-link" activeClassName="active-menu" to="/contacto">Contacto</NavLink>
+                        <a className="nav-link" target="_blank" rel="noreferrer" activeClassName="active-menu" href="https://intranet-lebrija.herokuapp.com/">Intranet</a>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tramites 

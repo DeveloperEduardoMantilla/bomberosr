@@ -4,9 +4,11 @@ import img from '../assets/img/logo.png';
 import * as global from "../components/global.js";
 
 function SolicitarPqrds(){
-    const Swal = require('sweetalert2')
+
 
     const [servicio, setServicio] = useState([]);
+    const [file, setFile] = useState(null);
+
     
     const [formData, setFormData] = useState({
         nombre: '',
@@ -30,10 +32,8 @@ function SolicitarPqrds(){
     });
 
     const handleChange = (event) =>{
-        setFormData((prevState) => ({
-            ...prevState,
-            documentoUrl: event.target.files[0],
-        }));
+        setFile(event.target.files[0]);
+        console.log(event.target.files[0]);
     }
 
     function handleInputChange(event) {
@@ -48,62 +48,23 @@ function SolicitarPqrds(){
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        const data = new FormData();
-        data.append('files', formData.documentoUrl);
 
-        const upload_res = await axios({
-            method: 'POST',
-            url: global.direccionAcceso+'/api/upload/',
-            data
-        })
+        const formData = new FormData();
+        formData.append('documentoUrl', file);
 
-        if(upload_res){
-
-            setFormData((prevState) => ({
-                ...prevState,
-                documentoUrl: global.direccionAcceso+upload_res.data[0].url,
-            }));
-
-            axios.post(global.direccionAcceso+'/api/pqrds',{data: formData})
-            .then(response => {
-                Swal.fire({
-                    title: `Pqrds enviada con exito!`,
-                    timer: 3000,
-                    icon: 'success',
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    toast: true
-        
-                })
-                setFormData({
-                    nombre: '',
-                    documento: '',
-                    email: '',
-                    telefono: '',
-                    tipo_pqrd: 0,
-                    asunto: '',
-                    observacion: '',
-                    documentoUrl: ''
-                });
-            })
-            .catch(error => {
-                console.log(error);
-                Swal.fire({
-                    title: `Error!`,
-                    timer: 3000,
-                    icon: 'success',
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    toast: true
-        
-                })
+        try {
+            await axios.post(global.direccionAcceso+'/api/pqrds',{formData}, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
             });
-        }
-
+            console.log('Solicitud enviada con éxito');
+          } catch (error) {
+            console.error('Error al enviar la solicitud', error);
+          }
 
     }
+
     return(
         <React.Fragment>
         <div className="container presentarPqrds">
