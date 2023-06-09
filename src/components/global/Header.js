@@ -6,6 +6,7 @@ import { FaFacebook,FaInstagram,FaYoutube,FaPhoneVolume,FaEnvelope} from "react-
 import * as global from "../global.js";
 
 const Header = () =>{
+    
     const [data, setData] = useState([]);
 
     const GetList = () =>  {
@@ -23,22 +24,22 @@ const Header = () =>{
         
         <header>
             <div className='header-first-small'>
-                <h1>Número de emergencias: {(data.length!=0)? data.attributes.celular :" "  }</h1>
+                <h1>Número de emergencias: {(data.length!==0)? data.attributes.celular :" "  }</h1>
             </div>
             <div className='header-first'>
                 <div className='container-first'>
                 <div className='header-address'>
-                    <h1>{(data.length!=0)? " "+data.attributes.direccion :" "  }</h1>
+                    <h1>{(data.length!==0)? " "+data.attributes.direccion :" "  }</h1>
                 </div>
                 <div className='header-social'>
                     <div className='header-redes'>
-                        <div><FaFacebook/></div>
-                        <div><FaInstagram/></div>
-                        <div><FaYoutube/></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlFacebook :" "  }><FaFacebook/></a></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlInstagram :" "  }><FaInstagram/></a></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlYoutube :" "  }><FaYoutube/></a></div>
                     </div>
                     <div className='header-contacto'>
                         <h1>Número de emergencias: 
-                        {(data.length!=0)? " "+data.attributes.celular :" "  }
+                        {(data.length!==0)? " "+data.attributes.celular :" "  }
                         </h1>
                     </div>
                 </div>
@@ -55,7 +56,7 @@ const Header = () =>{
                             </div>
                             <div className='linea-contact'>
                                 <h3>Linea</h3>
-                                <p>{(data.length!=0)? data.attributes.celular :" "  }</p>
+                                <p>{(data.length!==0)? data.attributes.fijo :" "  }</p>
                             </div>
                         </div>
                         <div className='contact_header'>
@@ -64,7 +65,7 @@ const Header = () =>{
                             </div>
                             <div className='linea-contact'>
                                 <h3>Correo</h3>
-                                <p>{(data.length!=0)? data.attributes.email :" "  }</p>
+                                <p>{(data.length!==0)? data.attributes.email :" "  }</p>
                             </div>
                         </div>
                 </div>

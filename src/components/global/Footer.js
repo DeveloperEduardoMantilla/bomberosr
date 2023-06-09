@@ -1,18 +1,31 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import footer from '../../assets/img/footer/logo-footer.png';
 import { FaChevronRight,FaMapPin,FaAddressBook,FaWindowMaximize  } from "react-icons/fa";
+import * as global from "../global.js";
 
-class Header extends Component {
+const Footer = () =>{
 
-    render() {
+    const [data, setData] = useState([]);
+
+    const GetList = () =>  {
+        axios.get(global.direccionAcceso+"/api/informacion-bomberos/1?populate=*/").then((value)=>{
+            setData(value.data.data);
+        });
+    };
+
+    useEffect(()=>{
+        GetList();
+    });
+
         return (
             <footer>
                 <div className="contenido-footer">
                     <div className="box-footer">
                         <h1>NOS ENCUENTRAS EN:</h1>
-                        <p><FaMapPin /> Calle 8 No 9 - 45, Lebrija(Sder), Colombia</p>
-                        <p><FaAddressBook /> 316 350 4746 - 037 656 7884</p>
-                        <p><FaWindowMaximize /> bomberoslebrija@hotmail.com</p>
+                        <p><FaMapPin />{(data.length!==0)? data.attributes.direccion :" "  }</p>
+                        <p><FaAddressBook /> {(data.length!==0)? data.attributes.email :" "  }</p>
+                        <p><FaWindowMaximize /> {(data.length!==0)? data.attributes.celular :" "  }</p>
                     </div>
                     <div className="box-footer">
                         <h1>ENLACES DE INTERÉS</h1>
@@ -29,6 +42,4 @@ class Header extends Component {
             </footer>
         )
     }
-}
-
-export default Header;
+export default Footer;

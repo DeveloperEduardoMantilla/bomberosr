@@ -87,6 +87,12 @@ header{
 .header-redes div{
     margin: 0px 5px;
 }
+.header-redes div a{
+    color: #fff;
+}
+.header-redes div a:hover{
+    color:var(--colorBomberos3)
+}
 
 .header-social {
     display: flex;
@@ -216,16 +222,18 @@ header{
 .box-info-descatada-md{
     padding: 0px 20px;
     max-width: 600px;
-    text-align: center;
 }
 .box-info-descatada-md h1{
     color: var(--colorBomberos3);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 34px;
+    text-align: center;
 }
 .box-info-descatada-md p{
     padding-top: 10px;
-    color: var(--colBomberos2);
+    font-weight: 400;
+    text-align: justify;
+    color: var(--colorParrafo);
 }
 .box-info-titulo {
     font-weight: 600 !important;
@@ -236,11 +244,11 @@ header{
     color: var(--colorBomberos2);
 }
 .box-info-text {
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     font-size: 16px !important;
 }
 .box-info-descatada-md > img{
-    max-width: 250px;
+    max-width: 350px;
     border-radius: 8px;
     box-shadow: 30px 30px 20px #f2f2f2;
     
@@ -288,7 +296,7 @@ header{
 }
 .box-accesos  h1{
     padding-top: 20px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     color: var(--colorTitulo2);
 }
@@ -337,7 +345,7 @@ header{
     font-weight: 600;
     font-size: 32px;
     color: var(--colorBomberos3);
-    font-weight: 700;
+    font-weight: 600;
 }
 .text-convocatoria{
     padding: 20px 0;
@@ -1243,7 +1251,7 @@ label span{
 }
 .contenido-noticia p{
     font-family: var(--tipografiaTitulos);
-    font-size: 18px;
+    font-size: 17px;
     text-align: justify;
     padding-top: 20px;
     line-height:1.2em;
