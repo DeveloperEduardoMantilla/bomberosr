@@ -85,6 +85,7 @@ const Header = () =>{
                         <NavLink className="nav-link" activeClassName="active-menu" to="/emergencias">Emergencias</NavLink>
                         <NavLink className="nav-link" activeClassName="active-menu" to="/contacto">Contacto</NavLink>
                         <a className="nav-link" target="_blank" rel="noreferrer" activeClassName="active-menu" href="https://intranet-lebrija.herokuapp.com/">Intranet</a>
+                        <a className="nav-link" target="_blank" rel="noreferrer" activeClassName="active-menu" href="https://seahorse-app-ham5z.ondigitalocean.app/admin/auth/login">Admin</a>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tramites 
