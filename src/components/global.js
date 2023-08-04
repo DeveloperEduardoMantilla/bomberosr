@@ -1,1 +1,1 @@
-export var direccionAcceso="https://seahorse-app-ham5z.ondigitalocean.app";
+export var direccionAcceso="http://localhost:1337";

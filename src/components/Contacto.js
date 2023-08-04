@@ -40,7 +40,6 @@ const Contacto = () =>{
             <div className="linea-contacto">
                 <div className="box-contacto-1">
                     <h1> <FaMap className="FaMap"/> <span style={{color: "orange"}}>Google</span> Maps</h1>
-                                            
                     <br></br>
                     <h3>Lugares de Referencia</h3>
                     {lista.map((item) =>{

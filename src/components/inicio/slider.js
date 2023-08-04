@@ -19,16 +19,17 @@ const Slider = () =>{
         <React.Fragment>
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
+                    
                     {lista.map((item, key) =>{
                         var secuencia = "carousel-item";
-                        if(key==1){
+                        if(key===0){
                             secuencia = "carousel-item active";
                         }else{
                             secuencia = "carousel-item";
                         }
                         return (
                         <div className={secuencia} key={item.id}>
-                            <img src={global.direccionAcceso+item.attributes.sliderImg.data[0].attributes.url} className=""></img>
+                            <img src={global.direccionAcceso+item.attributes.sliderImg.data[0].attributes.url} className="" alt="Slider bomberos"></img>
                         </div>
                         )
                     })}
