@@ -6,40 +6,39 @@ import { FaFacebook,FaInstagram,FaYoutube,FaPhoneVolume,FaEnvelope} from "react-
 import * as global from "../global.js";
 
 const Header = () =>{
-    
+
     const [data, setData] = useState([]);
-
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/informacion-bomberos/1?populate=*/").then((value)=>{
-            setData(value.data.data);
-        });
-    };
-
+    const url2 = process.env.data;
     useEffect(()=>{
-        GetList();
-    });
+        const url = process.env.REACT_APP_ESTACION_INFO
+        axios.get(url).then(response=>{
+          setData(response.data[0]);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+    },[]);
 
     return (
         <React.Fragment>
-        
+        {console.log(url2)}
         <header>
             <div className='header-first-small'>
-                <h1>Número de emergencias: {(data.length!==0)? data.attributes.celular :" "  }</h1>
+                <h1>Número de emergencias: {(data.length!==0)? data.celular :" "  }</h1>
             </div>
             <div className='header-first'>
                 <div className='container-first'>
                 <div className='header-address'>
-                    <h1>{(data.length!==0)? " "+data.attributes.direccion :" "  }</h1>
+                    <h1>{(data.length!==0)? " "+data.direccion :" "  }</h1>
                 </div>
                 <div className='header-social'>
                     <div className='header-redes'>
-                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlFacebook :" "  }><FaFacebook/></a></div>
-                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlInstagram :" "  }><FaInstagram/></a></div>
-                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.attributes.urlYoutube :" "  }><FaYoutube/></a></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.urlFacebook :" "  }><FaFacebook/></a></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.urlInstagram :" "  }><FaInstagram/></a></div>
+                        <div><a target="_blank" rel="noreferrer" href={(data.length!==0)? " "+data.urlYoutube :" "  }><FaYoutube/></a></div>
                     </div>
                     <div className='header-contacto'>
                         <h1>Número de emergencias: 
-                        {(data.length!==0)? " "+data.attributes.celular :" "  }
+                        {(data.length!==0)? " "+data.celular :" "  }
                         </h1>
                     </div>
                 </div>
@@ -56,7 +55,7 @@ const Header = () =>{
                             </div>
                             <div className='linea-contact'>
                                 <h3>Linea</h3>
-                                <p>{(data.length!==0)? data.attributes.fijo :" "  }</p>
+                                <p>{(data.length!==0)? data.fijo :" "  }</p>
                             </div>
                         </div>
                         <div className='contact_header'>
@@ -65,7 +64,7 @@ const Header = () =>{
                             </div>
                             <div className='linea-contact'>
                                 <h3>Correo</h3>
-                                <p>{(data.length!==0)? data.attributes.email :" "  }</p>
+                                <p>{(data.length!==0)? data.email :" "  }</p>
                             </div>
                         </div>
                 </div>

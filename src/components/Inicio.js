@@ -17,6 +17,11 @@ class Router extends Component {
             <Conozcanos/>
             <Invitacion/>
             <Noticias/>
+            {/* <Slider/>
+            <Accesos/>
+            <Conozcanos/>
+            <Invitacion/>
+            <Noticias/> */}
 
         </React.Fragment>
         );

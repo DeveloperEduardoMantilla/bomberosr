@@ -7,25 +7,23 @@ import * as global from "../global.js";
 const Footer = () =>{
 
     const [data, setData] = useState([]);
-
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/informacion-bomberos/1?populate=*/").then((value)=>{
-            setData(value.data.data);
-        });
-    };
-
+    const url2 = import.meta.env;
     useEffect(()=>{
-        GetList();
-    });
+        axios.get('http://127.10.10.12:5015/estacionInfo').then(response=>{
+          setData(response.data[0]);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+    },[]);
 
         return (
             <footer>
                 <div className="contenido-footer">
                     <div className="box-footer">
                         <h1>NOS ENCUENTRAS EN:</h1>
-                        <p><FaMapPin />{(data.length!==0)? data.attributes.direccion :" "  }</p>
-                        <p><FaAddressBook /> {(data.length!==0)? data.attributes.email :" "  }</p>
-                        <p><FaWindowMaximize /> {(data.length!==0)? data.attributes.celular :" "  }</p>
+                        <p><FaMapPin />{(data.length!==0)? data.direccion :" "  }</p>
+                        <p><FaAddressBook /> {(data.length!==0)? data.email :" "  }</p>
+                        <p><FaWindowMaximize /> {(data.length!==0)? data.celular :" "  }</p>
                     </div>
                     <div className="box-footer">
                         <h1>ENLACES DE INTERÉS</h1>

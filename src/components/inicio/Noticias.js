@@ -9,17 +9,16 @@ const Noticias = () =>{
     const [lista, setLista] = useState([]);
     const [isLoading, setIsLoading] = useState(true); 
     
-    const GetList = () =>  {
-        setIsLoading(false);
-        axios.get(global.direccionAcceso+"/api/noticias?populate=*").then((value)=>{
-        setLista(value.data.data);
-        });
-    };
-    
     useEffect(()=>{
-        GetList();
+        const url = process.env.REACT_APP_NOTICIA
+        axios.get(url).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
         setIsLoading(false);
-    });
+    },[]);
+
     if (isLoading) {
         return (
         <div className="container d-flex justify-content-center">
@@ -55,12 +54,12 @@ const Noticias = () =>{
                                             <a href={"VerNoticia/"+item.id} className="noticia-inicio" key={item.id}>
                                                 <div className="noticia-inicio-contenido">
                                                     <div className="noticia-inicio-img">
-                                                    <img  src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt="contenido fallo" width="100%"></img>
+                                                    <img  src={item.imgUrl} alt="contenido fallo" width="100%"></img>
                                                     </div>
                                                     <div className="noticia-contenido">
-                                                        <h2>{item.attributes.titulo}</h2>
-                                                        <h3>Fecha Publicación: {item.attributes.fecha}</h3>
-                                                        <p className="limitado">{recortarTexto(item.attributes.descripcion)}</p>
+                                                        <h2>{item.titulo}</h2>
+                                                        <h3>Fecha Publicación: {item.fecha}</h3>
+                                                        <p className="limitado">{recortarTexto(item.descripcion)}</p>
                                                         <p className="btn-ver">Ver Mas</p>
                                                     </div>
                                                 </div>

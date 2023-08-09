@@ -10,21 +10,21 @@ const Contacto = () =>{
     const [isLoading, setIsLoading] = useState(true); 
 
 
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/informacion-bomberos?populate=*").then((value)=>{
-            setLista(value.data.data);
-            setIsLoading(false);
-        });
-        axios.get(global.direccionAcceso+"/api/dependencias?populate=*").then((valueDependencia)=>{
-            setDependencia(valueDependencia.data.data);
-            setIsLoading(false);
-        });
-    };
-
     useEffect(()=>{
-        GetList();
+        const estacionInfo = process.env.REACT_APP_ESTACION_INFO
+        const dependencia = process.env.REACT_APP_DEPENDENCIA
+        axios.get(estacionInfo).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+        axios.get(dependencia).then(response=>{
+            setDependencia(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
         setIsLoading(false);
-    });
+    },[]);
 
     if (isLoading) {
         return (
@@ -45,15 +45,15 @@ const Contacto = () =>{
                     {lista.map((item) =>{
                         return (
                             <div key={item.id}>
-                                <p>{item.attributes.descripcion}</p>
+                                <p>{item.descripcion}</p>
                                 <h3>Fijo</h3>
-                                <p>{item.attributes.fijo}</p>
+                                <p>{item.fijo}</p>
                                 <h3>Celular</h3>
-                                <p>{item.attributes.celular}</p>
+                                <p>{item.celular}</p>
                                 <h3>E-mail</h3>
-                                <p>{item.attributes.email}</p>
+                                <p>{item.email}</p>
                                 <h3>Direccion</h3>
-                                <p>{item.attributes.direccion}</p>
+                                <p>{item.direccion}</p>
                             </div>
                             )
                     })}
@@ -64,12 +64,12 @@ const Contacto = () =>{
                         return (
                             <div className="box-dependencias" key={item.id}>
                                 <div className="box-dependencias-md1">
-                                    <img alt=""  src={global.direccionAcceso+item.attributes.img.data[0].attributes.url}></img>
+                                    <img alt=""  src={item.imgUrl}></img>
                                 </div>
                                 <div className="box-dependencias-md2">
-                                    <h1>{item.attributes.nombre}</h1>
-                                    <h1>{item.attributes.email}</h1>
-                                    <h1>{item.attributes.telefono}</h1>
+                                    <h1>{item.nombre}</h1>
+                                    <h1>{item.email}</h1>
+                                    <h1>{item.telefono}</h1>
                                 </div>
                             </div>
                             )

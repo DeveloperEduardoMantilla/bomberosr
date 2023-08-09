@@ -4,18 +4,18 @@ import foto from "../../assets/img/inicio/loading.gif";
 import * as global from "../global.js";
 
 const Conozcanos =() => {
-    const [data, setLista] = useState([]);
     const [isLoading, setIsLoading] = useState(true); 
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/modulo-inicios?populate=*").then((value)=>{
-        setLista(value.data.data);
-        });
-    };
+    const [lista, setLista] = useState([]);
 
     useEffect(()=>{
-        GetList();
+        const url = process.env.REACT_APP_MODULO_INICIO
+        axios.get(url).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
         setIsLoading(false);
-    });
+    },[]);
 
     if (isLoading) {
         return (
@@ -27,15 +27,15 @@ const Conozcanos =() => {
     return (
         <React.Fragment>
             <div className="info-destacada">
-                    {data.map((item) =>{
+                    {lista.map((item,key) =>{
                         return(
                         <div className="box-info-destacada pt-4 pb-4" key={item.id}>
                             <div className="box-info-descatada-md">
-                                <h1>{item.attributes.titulo}</h1>
-                                <p className="box-info-text">{item.attributes.descripcion}</p>
+                                <h1>{item.titulo}</h1>
+                                <p className="box-info-text">{item.descripcion}</p>
                             </div>
                             <div className="box-info-descatada-md">
-                                <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt=""></img>
+                                <img src={item.img} alt=""></img>
                             </div>
                         </div>)
                     })}

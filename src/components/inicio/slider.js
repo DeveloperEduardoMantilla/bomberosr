@@ -4,16 +4,14 @@ import * as global from "../global.js";
 
 const Slider = () =>{
     const [lista, setLista] = useState([]);
-    
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/sliders?populate=*").then((value)=>{
-        setLista(value.data.data);
-        });
-    };
-    
     useEffect(()=>{
-        GetList();
-    });
+        const url = process.env.REACT_APP_SLIDER
+        axios.get(url).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+    },[]);
 
     return(
         <React.Fragment>
@@ -29,7 +27,7 @@ const Slider = () =>{
                         }
                         return (
                         <div className={secuencia} key={item.id}>
-                            <img src={global.direccionAcceso+item.attributes.sliderImg.data[0].attributes.url} className="" alt="Slider bomberos"></img>
+                            <img src={item.img} alt="Slider bomberos"></img>
                         </div>
                         )
                     })}

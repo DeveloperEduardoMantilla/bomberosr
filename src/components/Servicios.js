@@ -8,16 +8,15 @@ const Servicios = () =>{
     const [lista, setLista] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/servicios?populate=*").then((value)=>{
-        setLista(value.data.data);
-        setIsLoading(false);
-        });
-    };
-    
     useEffect(()=>{
-        GetList();
-    });
+        const url = process.env.REACT_APP_SERVICIO
+        axios.get(url).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+        setIsLoading(false);
+    },[]);
 
     if (isLoading) {
         return (
@@ -43,12 +42,12 @@ const Servicios = () =>{
                                 return(
                                 <div className="servicio-bomberos" key={item.id}>
                                     <div className="servicios-bomberos-contenido">
-                                        <h1>{item.attributes.titulo}</h1>
-                                        <p>{item.attributes.descripcion}</p>
+                                        <h1>{item.titulo}</h1>
+                                        <p>{item.descripcion}</p>
                                         <NavLink className="btn btn-solicitar btn-sm" to="serviciosForm"> Solicitar</NavLink>
                                     </div>
                                     <div className="servicios-bomberos-img">
-                                        <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt="Servicios Bomberos"></img>
+                                        <img src={item.imgUrl} alt="Servicios Bomberos"></img>
                                     </div>
                                 </div>
                                 )

@@ -10,18 +10,15 @@ const Noticias = ()  =>{
     
     const [lista, setLista] = useState([]);
 
-    const GetList = () =>  {
-        axios.get(global.direccionAcceso+"/api/noticias?populate=*").then((value)=>{
-        setLista(value.data.data);
-        setIsLoading(false);
-        }).catch(error =>{
-            console.log(error);
-        });
-    };
-
     useEffect(()=>{
-        GetList();
-    });
+        const url = process.env.REACT_APP_NOTICIA
+        axios.get(url).then(response=>{
+            setLista(response.data);
+        }).catch(error =>{
+          console.log("Error al obtener la data: ", error);
+        });
+        setIsLoading(false);
+    },[]);
 
     if (isLoading) {
         return (
@@ -44,12 +41,12 @@ const Noticias = ()  =>{
                         return (
                             <a href={"verNoticia/"+item.id} className="pag-noticias-box" key={item.id}>
                                 <div className="pag-img">
-                                    <img src={global.direccionAcceso+item.attributes.img.data[0].attributes.url} alt=""></img>
+                                    <img src={item.imgUrl} alt=""></img>
                                 </div>
                                 <div className="pag-noticia">
-                                    <h1>{item.attributes.titulo}</h1>
-                                    <p>{item.attributes.fecha}</p>
-                                    <p>{item.attributes.descripcion}</p>
+                                    <h1>{item.titulo}</h1>
+                                    <p>{item.fecha}</p>
+                                    <p>{item.descripcion}</p>
                                     <p className="btn-ver">Ver Mas</p>
                                 </div>
                             </a>

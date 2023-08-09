@@ -16,6 +16,7 @@ import ConsultarPqrds from './components/ConsultarPqrds';
 import SolicitarPqrds from './components/SolicitarPqrds';
 import Error404 from './components/Error404';
 import PagosForm from "./components/pagosForm.js";
+import data from "./components/global/data.js";
 
 const Router = () =>{
         return(
@@ -35,6 +36,7 @@ const Router = () =>{
                 <Route exact path="/VerNoticia/:id" component={VerNoticia}/>
                 <Route exact path="/ConsultarPqrds" component={ConsultarPqrds}/>
                 <Route exact path="/SolicitarPqrds" component={SolicitarPqrds}/>
+                <Route exact path="/data" component={data}/>
                 <Route exact path="/" component={Inicio}/>
                 <Route path="*" component={Error404}/>
             </Switch>
